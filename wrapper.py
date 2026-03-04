@@ -97,7 +97,7 @@ class PengiWrapper():
             for k, v in model_state_dict.items():
                 if k.startswith("module."):
                     name = k[7:] # remove 'module.'
-                else
+                else:
                     name = k
                 new_state_dict[name] = v
             model.load_state_dict(new_state_dict)
