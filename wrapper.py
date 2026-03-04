@@ -91,7 +91,7 @@ class PengiWrapper():
         model.dec_text_len = args.dataset_config['dec_text_len']
         model_state_dict = torch.load(self.model_path, map_location=torch.device('cpu'))['model']
         try:
-            model.load_state_dict(model_state_dict)
+            model.load_state_dict(model_state_dict, strict=False)
         except:
             new_state_dict = OrderedDict()
             for k, v in model_state_dict.items():
@@ -100,7 +100,7 @@ class PengiWrapper():
                 else:
                     name = k
                 new_state_dict[name] = v
-            model.load_state_dict(new_state_dict)
+            model.load_state_dict(new_state_dict, strict=False)
 
         enc_tokenizer = AutoTokenizer.from_pretrained(args.text_model)
         if 'gpt' in args.text_model:
