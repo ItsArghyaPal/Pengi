@@ -95,7 +95,10 @@ class PengiWrapper():
         except:
             new_state_dict = OrderedDict()
             for k, v in model_state_dict.items():
-                name = k[7:] # remove 'module.'
+                if k.startswith("module."):
+                    name = k[7:] # remove 'module.'
+                else
+                    name = k
                 new_state_dict[name] = v
             model.load_state_dict(new_state_dict)
 
